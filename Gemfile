@@ -40,7 +40,8 @@ group :development, :test do
   gem 'pry-byebug'
 
   gem 'rspec-rails', '~> 3.5'
-  gem 'webrat'
+  gem 'json_spec'
+  gem 'capybara'
 end
 
 group :development do
