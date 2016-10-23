@@ -3,9 +3,9 @@ require 'rails_helper'
 describe TimestampController do
   describe 'GET show' do
     let(:date) { Date.today }
-    let(:string_date) { date.strftime("%B%%20\%d,%%20\%Y") }
+    let(:string_date) { date.strftime('%B%%20\%d,%%20\%Y') }
     let(:unix_date) { date.to_time.to_i }
-    let(:formatted_date) { date.strftime("%B, %d, %Y") }
+    let(:formatted_date) { date.strftime('%B, %d, %Y') }
     let(:dates) {
       {
         unix: unix_date,
