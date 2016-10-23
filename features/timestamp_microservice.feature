@@ -2,17 +2,14 @@ Feature: Timestamp Microservice
 
   So that I can convert unix timestamps to natural language dates & vice versa.
 
-  Scenario: Convert unix timestamps to dates
-    Given I visit the homepage
-    When I pass a timestamp paramter
-    Then it is converted to a unix timestamp
-
   Scenario: Convert dates to unix timestamps
-    Given I visit the homepage
-    When I pass a date parameter
+    When I visit the homepage with a date parameter
+    Then it is converted to a timestamp
+
+  Scenario: Convert unix timestamps to dates
+    When I visit the homepage with a timestamp paramter
     Then it is converted to a date
 
   Scenario: Return null if string is not a date
-    Given I visit the homepage
-    When I pass an incorrect paramter
+    When I visit the homepage with an incorrect paramter
     Then receive null
