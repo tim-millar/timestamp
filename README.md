@@ -2,8 +2,8 @@
 
 ## Project aims
 The Timestamp Microservice is a small project for Ruby on Rails, meant to
-exercise proper development workflow (version control, integration unit testing,
-etc).
+exercise proper development workflow (version control, integration and unit
+testing, etc).
 
 ## Functionality
 The microservice features a single controller action that renders a JSON object

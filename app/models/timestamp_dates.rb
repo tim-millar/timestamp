@@ -6,7 +6,7 @@ class TimestampDates
     @date = date
   end
 
-  def as_json
+  def as_json(options={})
     convert_timestamp
   end
 
