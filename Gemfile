@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'json_spec'
   gem 'capybara'
+  gem 'ruby_parser'
 end
 
 group :development do

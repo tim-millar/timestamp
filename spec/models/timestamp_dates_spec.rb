@@ -1,45 +1,61 @@
 require 'rails_helper'
 
-RSpec.describe TimestampDates do
+describe TimestampDates do
   describe '#as_json' do
-    let(:string_date) { date.strftime('%B%%20\%d,%%20\%Y') }
-    let(:unix_date) { date.to_time.to_i }
-    let(:formatted_date) { date.strftime('%B, %d, %Y') }
-    let(:date) { Date.today }
+    subject(:timestamp) { TimestampDates.new(date) }
+
     let(:timestamp_dates) {
       {
         unix: unix_date,
-        natural: formatted_date,
+        natural: natural_date,
       }
     }
 
-    context 'when given a natural language date' do
-      subject(:timestamp) { TimestampDates.new(string_date) }
+    let(:date_param) {
+      double(
+        'DateParam',
+        is_unix?: is_unix,
+        is_natural?: is_natural,
+      )
+    }
 
-      it 'returns JSON containing the unix timestamp' do
-        expect(timestamp.as_json).to eql(timestamp_dates)
-      end
+    let(:string_date) { todays_date.strftime('%B%%20\%d,%%20\%Y') }
+    let(:unix_date) { todays_date.to_time.to_i }
+    let(:natural_date) { todays_date.strftime('%B, %d, %Y') }
+    let(:todays_date) { Date.today }
+    let(:is_unix) { false }
+    let(:is_natural) { false }
+
+    before do
+      allow(TimestampDates::DateParam).to receive(:new).with(date).
+        and_return(date_param)
     end
 
     context 'when given a unix timestamp' do
-      subject(:timestamp) { TimestampDates.new(unix_date) }
+      let(:date) { unix_date }
+      let(:is_unix) { true }
 
       it 'returns JSON containing the natural language date' do
         expect(timestamp.as_json).to eql(timestamp_dates)
       end
     end
 
+    context 'when given a natural language date' do
+      let(:date) { string_date }
+      let(:is_natural) { true }
+
+      it 'returns JSON containing the unix timestamp' do
+        expect(timestamp.as_json).to eql(timestamp_dates)
+      end
+    end
+
     context 'when given an incorrectly formatted date' do
-      subject(:timestamp) { TimestampDates.new('incorrect_argument') }
-      let(:null_dates) {
-        {
-          unix: 'null',
-          natural: 'null',
-        }
-      }
+      let(:date) { 'incorrect_arg' }
+      let(:unix_date) { 'null' }
+      let(:natural_date) { 'null' }
 
       it 'returns JSON containing nulls' do
-        expect(timestamp.as_json).to eql(null_dates)
+        expect(timestamp.as_json).to eql(timestamp_dates)
       end
     end
   end

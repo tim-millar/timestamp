@@ -13,12 +13,12 @@ class TimestampDates
   private
 
   def convert_timestamp
-    if is_integer?(date)
+    if date_param.is_unix?
       {
         unix: Integer(date),
         natural: Time.at(Integer(date)).to_date.strftime('%B, %d, %Y'),
       }
-    elsif !Date._parse(date).empty?
+    elsif date_param.is_natural?
       {
         unix: Date.parse(parse_date).to_time.to_i,
         natural: Date.parse(parse_date).strftime('%B, %d, %Y'),
@@ -31,11 +31,11 @@ class TimestampDates
     end
   end
 
-  def parse_date
-    date.gsub(/%20/, ' ')
+  def date_param
+    DateParam.new(date)
   end
 
-  def is_integer?(string)
-    true if Integer(string) rescue false
+  def parse_date
+    date.gsub(/%20/, ' ')
   end
 end
