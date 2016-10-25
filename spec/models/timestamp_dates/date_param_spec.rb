@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 class TimestampDates
-  RSpec.describe DateParam do
+  describe DateParam do
     subject(:date_param) { DateParam.new(date_string)}
 
     describe '#is_unix?' do

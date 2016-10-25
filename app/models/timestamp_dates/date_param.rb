@@ -1,18 +1,28 @@
 class TimestampDates
   class DateParam
-    attr_reader :date_string
-    private :date_string
+    attr_reader :date
+    private :date
 
-    def initialize(date_string)
-      @date_string = date_string
+    def initialize(date)
+      @date = date
     end
 
     def is_unix?
-      true if Integer(date_string) rescue false
+      date && numeric_chars.all?
     end
 
     def is_natural?
-      !Date._parse(date_string).empty?
+      date && parse_date.present?
+    end
+
+    private
+
+    def numeric_chars
+      date.chars.map  { |char| char =~ /[0-9]/ }
+    end
+
+    def parse_date
+      Date._parse(date)
     end
   end
 end

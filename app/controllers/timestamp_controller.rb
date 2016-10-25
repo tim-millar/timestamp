@@ -1,3 +1,5 @@
+require 'timestamp_dates'
+
 class TimestampController < ApplicationController
   def show
     render json: timestamp_dates

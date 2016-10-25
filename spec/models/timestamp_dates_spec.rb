@@ -19,7 +19,7 @@ describe TimestampDates do
       )
     }
 
-    let(:string_date) { todays_date.strftime('%B%%20\%d,%%20\%Y') }
+    let(:string_date) { todays_date.strftime('%B%%20%d,%%20%Y') }
     let(:unix_date) { todays_date.to_time.to_i }
     let(:natural_date) { todays_date.strftime('%B, %d, %Y') }
     let(:todays_date) { Date.today }

@@ -19,8 +19,14 @@ describe TimestampController do
         and_return(timestamp_dates)
     end
 
-    context 'when given a date' do
+    context 'when given a natural date' do
       let(:date) { formatted_date }
+      let(:natural_date_converter) { double('NaturalDateConverter', adapt: dates) }
+
+      before do
+        allow(TimestampDates::NaturalDateConverter).to receive(:new).with(date).
+          and_return(natural_date_converter)
+      end
 
       it 'responds with json containing the unix timestamp' do
         get :show, date: date
@@ -30,6 +36,12 @@ describe TimestampController do
 
     context 'when given a unix timestamp' do
       let(:date) { unix_date.to_s }
+      let(:unix_date_converter) { double('UnixDateConverter', adapt: dates) }
+
+      before do
+        allow(TimestampDates::UnixDateConverter).to receive(:new).with(date).
+          and_return(unix_date_converter)
+      end
 
       it 'responds with json containing the natural language date' do
         get :show, date: date
@@ -41,6 +53,11 @@ describe TimestampController do
       let(:date) { 'incorrect_argument' }
       let(:unix_date) { 'null' }
       let(:formatted_date) { 'null' }
+
+      before do
+        allow(TimestampDates::NullDateConverter).to receive(:adapt).
+          and_return(dates)
+      end
 
       it 'responds with json containing nulls' do
         get :show, date: date
