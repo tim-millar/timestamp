@@ -1,4 +1,4 @@
-require 'timestamp_dates'
+require 'dates'
 
 class TimestampController < ApplicationController
   def show
@@ -8,7 +8,7 @@ class TimestampController < ApplicationController
   private
 
   def timestamp_dates
-    TimestampDates.new(date)
+    Dates.new(date)
   end
 
   def date

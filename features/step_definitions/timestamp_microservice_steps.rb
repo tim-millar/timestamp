@@ -1,5 +1,5 @@
 When(/^I visit the homepage with a date parameter$/) do
-  @date = Date.today.strftime("%B%%20\%d%%20\%Y")
+  @date = Date.today.strftime("%B, %d, %Y")
   visit root_path(date: @date)
 end
 

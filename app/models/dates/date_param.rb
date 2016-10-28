@@ -1,4 +1,4 @@
-class TimestampDates
+class Dates
   class DateParam
     attr_reader :date
     private :date

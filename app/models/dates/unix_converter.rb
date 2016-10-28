@@ -1,5 +1,5 @@
-class TimestampDates
-  class UnixDateConverter
+class Dates
+  class UnixConverter
     attr_reader :date
     private :date
 

@@ -1,4 +1,4 @@
-class TimestampDates
+class Dates
   attr_reader :date
   private :date
 
@@ -14,11 +14,11 @@ class TimestampDates
 
   def timestamp_builder
     if date_param.is_unix?
-      UnixDateConverter.new(date)
+      UnixConverter.new(date)
     elsif date_param.is_natural?
-      NaturalDateConverter.new(date)
+      NaturalConverter.new(date)
     else
-      NullDateConverter
+      NullConverter
     end
   end
 

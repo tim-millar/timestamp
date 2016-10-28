@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-class TimestampDates
-  describe :NullDateConverter do
-    subject(:null_date_converter) { NullDateConverter }
+class Dates
+  describe NullConverter do
+    subject(:null_date_converter) { NullConverter }
 
     describe '.adapt' do
       let(:adapt) {

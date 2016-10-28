@@ -1,5 +1,5 @@
-class TimestampDates
-  class NaturalDateConverter
+class Dates
+  class NaturalConverter
     attr_reader :date
     private :date
 
@@ -10,7 +10,7 @@ class TimestampDates
     def adapt
       {
         unix: unix_date,
-        natural: formatted_date,
+        natural: date,
       }
     end
 
@@ -20,16 +20,8 @@ class TimestampDates
       natural_date.to_time.to_i
     end
 
-    def formatted_date
-      natural_date.strftime('%B, %d, %Y')
-    end
-
     def natural_date
-      Date.parse(swap_in_spaces)
-    end
-
-    def swap_in_spaces
-      date.gsub(/%20/, ' ')
+      Date.parse(date)
     end
   end
 end

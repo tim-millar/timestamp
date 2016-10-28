@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-class TimestampDates
-  describe UnixDateConverter do
-    subject(:unix_date_converter) { UnixDateConverter.new(date) }
+class Dates
+  describe UnixConverter do
+    subject(:unix_date_converter) { UnixConverter.new(date) }
 
     let(:date) { '1477350000' }
     let(:unix_date) { 1477350000 }

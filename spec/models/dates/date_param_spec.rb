@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-class TimestampDates
+class Dates
   describe DateParam do
     subject(:date_param) { DateParam.new(date_string)}
 
@@ -13,7 +13,7 @@ class TimestampDates
     end
 
     describe 'is_natural?' do
-      let(:date_string) { 'October%2024,%202016' }
+      let(:date_string) { 'October, 24, 2016' }
 
       it 'should return true of given a natural date' do
         expect(date_param.is_natural?).to eql(true)

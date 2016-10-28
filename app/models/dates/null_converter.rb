@@ -1,5 +1,5 @@
-class TimestampDates
-  class NullDateConverter
+class Dates
+  class NullConverter
     def self.adapt
       {
         unix: 'null',

@@ -4,9 +4,9 @@ describe TimestampController do
   describe 'GET show' do
     let(:timestamp_dates) { double('TimestampDates', as_json: dates) }
     let(:todays_date) { Date.today }
-    let(:formatted_date) { todays_date.strftime('%B%%20\%d,%%20\%Y') }
+    let(:formatted_date) { todays_date.strftime('%B%%20%d,%%20%Y') }
     let(:unix_date) { todays_date.to_time.to_i }
-    let(:natural_date) { todays_date.strftime('%B, %d, %Y') }
+    let(:natural_date) { todays_date.strftime('%B %d, %Y') }
     let(:dates) {
       {
         unix: unix_date,
@@ -15,16 +15,21 @@ describe TimestampController do
     }
 
     before do
-      allow(TimestampDates).to receive(:new).with(date).
+      allow(Dates).to receive(:new).with(date).
         and_return(timestamp_dates)
     end
 
     context 'when given a natural date' do
       let(:date) { formatted_date }
-      let(:natural_date_converter) { double('NaturalDateConverter', adapt: dates) }
+      let(:natural_date_converter) {
+        double(
+          'NaturalDateConverter',
+          adapt: dates,
+        )
+      }
 
       before do
-        allow(TimestampDates::NaturalDateConverter).to receive(:new).with(date).
+        allow(Dates::NaturalConverter).to receive(:new).with(date).
           and_return(natural_date_converter)
       end
 
@@ -39,7 +44,7 @@ describe TimestampController do
       let(:unix_date_converter) { double('UnixDateConverter', adapt: dates) }
 
       before do
-        allow(TimestampDates::UnixDateConverter).to receive(:new).with(date).
+        allow(Dates::UnixConverter).to receive(:new).with(date).
           and_return(unix_date_converter)
       end
 
@@ -55,7 +60,7 @@ describe TimestampController do
       let(:formatted_date) { 'null' }
 
       before do
-        allow(TimestampDates::NullDateConverter).to receive(:adapt).
+        allow(Dates::NullConverter).to receive(:adapt).
           and_return(dates)
       end
 
